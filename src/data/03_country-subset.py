@@ -34,17 +34,26 @@ def get_country(filename, country):
     # Use the country name to subset data
     subset_country = wine[wine['country'] == country ].copy()
 
-    # Subset the
-
     # Constructing the fname
     today = datetime.datetime.today().strftime('%Y-%m-%d')
     fname = f'data/processed/{today}-winemag_{country}.csv'
 
     # Saving the csv
     subset_country.to_csv(fname)
+    print(fname)  # print the fname from here
 
-    return(fname)
+    return(subset_country)  #returns the data frame
 
+
+"""
+Unit test.
+"""
+def get_mean_price(filename):
+    """ function to get the mean price of the wines
+    rounded to 4 decimals"""
+    wine = pd.read_csv(filename)
+    mean_price = wine['price'].mean()
+    return round(mean_price, 4)  # note the rounding here
 
 if __name__ == '__main__':
     filename = sys.argv[1]
